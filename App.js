@@ -61,25 +61,26 @@ export default function App() {
 
   return (
     <View style={styles.container}>
-      <Text style={{fontSize: 20, fontWeight: "bold"}}>Lista de Compras</Text>
-      
-      <View style={{marginVertical: 10}}>
-        <TextInput
-          style={styles.input}
-          placeholder="Digite um item"
-          value={nome}
-          onChangeText={setNome}
-        />
-        <Button onPress={salvarItem} title="Adicionar item" />
+      <View>
+        <Text style={{ fontSize: 20, fontWeight: "bold" }}>Lista de Compras</Text>
+        <View style={{ marginVertical: 10 }}>
+          <TextInput
+            style={styles.input}
+            placeholder="Digite um item"
+            value={nome}
+            onChangeText={setNome}
+          />
+          <Button onPress={salvarItem} title="Adicionar item" />
+        </View>
       </View>
 
       <FlatList
-        style={{ maxHeight: 400 }}
+        style={{ flex: 1, width: '100%' }}
         data={itens}
         keyExtractor={(item, index) => `${item.nome}-${index}`}
         renderItem={({ item }) => (
-          <ItemCard 
-            item={item} 
+          <ItemCard
+            item={item}
             onRemover={() => removerItem(item.nome)}
             onToggle={() => toggleItem(item.nome)}
             onEditar={(novoNome) => editarItem(item.nome, novoNome)}
@@ -89,7 +90,9 @@ export default function App() {
       />
 
       {itens.length > 0 && (
-        <Button color="red" title="Excluir todos" onPress={limparLista} />
+        <View style={{ marginTop: 10 }}>
+          <Button color="red" title="Excluir todos" onPress={limparLista} />
+        </View>
       )}
 
       <StatusBar style="auto" />
